@@ -2,11 +2,9 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'pomodoro_model.dart';
 export 'pomodoro_model.dart';
 
@@ -67,7 +65,7 @@ class _PomodoroWidgetState extends State<PomodoroWidget> {
                       FlutterFlowTheme.of(context).headlineMedium.fontStyle,
                 ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           elevation: 0.0,
         ),
@@ -92,7 +90,7 @@ class _PomodoroWidgetState extends State<PomodoroWidget> {
                 child: Stack(
                   children: [
                     Align(
-                      alignment: AlignmentDirectional(0.0, 0.0),
+                      alignment: const AlignmentDirectional(0.0, 0.0),
                       child: Container(
                         width: 240.0,
                         height: 240.0,
@@ -103,7 +101,7 @@ class _PomodoroWidgetState extends State<PomodoroWidget> {
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(0.0, 0.0),
+                      alignment: const AlignmentDirectional(0.0, 0.0),
                       child: Container(
                         width: 200.0,
                         height: 200.0,
@@ -112,7 +110,7 @@ class _PomodoroWidgetState extends State<PomodoroWidget> {
                           shape: BoxShape.circle,
                         ),
                         child: Padding(
-                          padding: EdgeInsets.all(16.0),
+                          padding: const EdgeInsets.all(16.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -128,7 +126,7 @@ class _PomodoroWidgetState extends State<PomodoroWidget> {
                                 ),
                                 controller: _model.timerController,
                                 updateStateInterval:
-                                    Duration(milliseconds: 1000),
+                                    const Duration(milliseconds: 1000),
                                 onChanged: (value, displayTime, shouldUpdate) {
                                   _model.timerMilliseconds = value;
                                   _model.timerValue = displayTime;
@@ -171,7 +169,7 @@ class _PomodoroWidgetState extends State<PomodoroWidget> {
                                           .fontStyle,
                                     ),
                               ),
-                            ].divide(SizedBox(height: 8.0)),
+                            ].divide(const SizedBox(height: 8.0)),
                           ),
                         ),
                       ),
@@ -191,16 +189,16 @@ class _PomodoroWidgetState extends State<PomodoroWidget> {
                         _model.timerController.onStartTimer();
                       },
                       text: 'Start Timer',
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.play_arrow_rounded,
                         size: 20.0,
                       ),
                       options: FFButtonOptions(
                         width: 160.0,
                         height: 50.0,
-                        padding: EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(8.0),
                         iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         iconColor: Colors.white,
                         color: FlutterFlowTheme.of(context).success,
                         textStyle:
@@ -219,7 +217,7 @@ class _PomodoroWidgetState extends State<PomodoroWidget> {
                                       .fontStyle,
                                 ),
                         elevation: 2.0,
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.transparent,
                           width: 1.0,
                         ),
@@ -234,16 +232,16 @@ class _PomodoroWidgetState extends State<PomodoroWidget> {
                         _model.timerController.onStopTimer();
                       },
                       text: 'Stop Timer',
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.pause_rounded,
                         size: 20.0,
                       ),
                       options: FFButtonOptions(
                         width: 160.0,
                         height: 50.0,
-                        padding: EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(8.0),
                         iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         iconColor: Colors.white,
                         color: FlutterFlowTheme.of(context).error,
                         textStyle:
@@ -262,7 +260,7 @@ class _PomodoroWidgetState extends State<PomodoroWidget> {
                                       .fontStyle,
                                 ),
                         elevation: 2.0,
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.transparent,
                           width: 1.0,
                         ),
@@ -280,16 +278,16 @@ class _PomodoroWidgetState extends State<PomodoroWidget> {
                       safeSetState(() {});
                     },
                     text: 'Reset Timer',
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.refresh_rounded,
                       size: 20.0,
                     ),
                     options: FFButtonOptions(
                       width: 160.0,
                       height: 50.0,
-                      padding: EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8.0),
                       iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       iconColor: FlutterFlowTheme.of(context).primaryText,
                       color: FlutterFlowTheme.of(context).secondaryBackground,
                       textStyle:
@@ -315,7 +313,7 @@ class _PomodoroWidgetState extends State<PomodoroWidget> {
                       borderRadius: BorderRadius.circular(25.0),
                     ),
                   ),
-                ].divide(SizedBox(height: 16.0)),
+                ].divide(const SizedBox(height: 16.0)),
               ),
               Row(
                 mainAxisSize: MainAxisSize.max,
@@ -364,7 +362,7 @@ class _PomodoroWidgetState extends State<PomodoroWidget> {
                                   .fontStyle,
                             ),
                       ),
-                    ].divide(SizedBox(height: 4.0)),
+                    ].divide(const SizedBox(height: 4.0)),
                   ),
                   Container(
                     width: 2.0,
@@ -416,11 +414,11 @@ class _PomodoroWidgetState extends State<PomodoroWidget> {
                                   .fontStyle,
                             ),
                       ),
-                    ].divide(SizedBox(height: 4.0)),
+                    ].divide(const SizedBox(height: 4.0)),
                   ),
-                ].divide(SizedBox(width: 24.0)),
+                ].divide(const SizedBox(width: 24.0)),
               ),
-            ].divide(SizedBox(height: 40.0)),
+            ].divide(const SizedBox(height: 40.0)),
           ),
         ),
       ),
