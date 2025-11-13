@@ -190,22 +190,33 @@ class _MyStepperPageState extends State<MyStepperPage> {
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
-                  title: const Text("Información"),
-                  content: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("Email: ${_emailController.text}"),
-                      const SizedBox(height: 8),
-                      Text("Address: ${_addressController.text}"),
-                      const SizedBox(height: 8),
-                      Text("Mobile No: ${_mobileController.text}"),
-                    ],
+                  icon: Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF35618E),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(Icons.check, color: Colors.white, size: 32),
+                  ),
+                  title: const Text(
+                    "Submission\nCompleted",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  ),
+                  content: Text(
+                    "{Email: ${_emailController.text}, Address: ${_addressController.text}, Mobile: ${_mobileController.text}}",
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 14),
                   ),
                   actions: [
-                    TextButton(
-                      onPressed: () => Navigator.of(context).pop(),
-                      child: const Text("Cerrar"),
+                    Center(
+                      child: TextButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        child: const Text(
+                          "Close",
+                          style: TextStyle(color: Color(0xFF35618E), fontSize: 16),
+                        ),
+                      ),
                     ),
                   ],
                 );
