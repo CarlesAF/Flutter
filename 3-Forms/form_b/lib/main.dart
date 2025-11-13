@@ -1,7 +1,28 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MaterialApp(home: MyStepperPage()));
+  runApp(MaterialApp(
+    home: MyStepperPage(),
+    theme: ThemeData(
+      primaryColor: const Color(0xFF90CAF9),
+      appBarTheme: const AppBarTheme(
+        backgroundColor: Color(0xFF90CAF9),
+        foregroundColor: Colors.black87,
+      ),
+      colorScheme: ColorScheme.light(
+        primary: const Color(0xFF35618E),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: const Color(0xFF35618E),
+          foregroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+          ),
+        ),
+      ),
+    ),
+  ));
 }
 
 class MyStepperPage extends StatefulWidget {
@@ -21,22 +42,30 @@ class _MyStepperPageState extends State<MyStepperPage> {
           content: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text("Personal", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              const Center(
+                child: Text("Personal", style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
+              ),
+              const SizedBox(height: 8),
               const Text("Pulsi 'Contact' o pulsi el botó de 'Continue'."),
             ],
           ),
           isActive: _currentStep >= 0,
+          state: StepState.indexed,
         ),
         Step(
           title: const Text("Contact"),
           content: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text("Contact", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              const Center(
+                child: Text("Contact", style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
+              ),
+              const SizedBox(height: 8),
               const Text("Pulsi 'Upload' o pulsi el botó de 'Continue'."),
             ],
           ),
           isActive: _currentStep >= 1,
+          state: StepState.editing,
         ),
         Step(
           title: const Text("Upload"),
@@ -44,31 +73,144 @@ class _MyStepperPageState extends State<MyStepperPage> {
             children: [
               TextField(
                 controller: _emailController,
-                decoration: const InputDecoration(labelText: "Email", prefixIcon: Icon(Icons.email)),
+                decoration: InputDecoration(
+                  hintText: "Email",
+                  hintStyle: const TextStyle(color: Color(0xFF90CAF9)),
+                  prefixIcon: const Icon(Icons.email, color: Color(0xFF90CAF9)),
+                  filled: true,
+                  fillColor: Colors.white,
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(color: Color(0xFF90CAF9), width: 1.5),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(color: Color(0xFF35618E), width: 2),
+                  ),
+                ),
               ),
+              const SizedBox(height: 16),
               TextField(
                 controller: _addressController,
-                decoration: const InputDecoration(labelText: "Address", prefixIcon: Icon(Icons.home)),
+                maxLines: 5,
+                decoration: InputDecoration(
+                  hintText: "Address",
+                  hintStyle: const TextStyle(color: Color(0xFF90CAF9)),
+                  prefixIcon: const Icon(Icons.home, color: Color(0xFF90CAF9)),
+                  prefixIconConstraints: const BoxConstraints(
+                    minWidth: 48,
+                    minHeight: 48,
+                  ),
+                  filled: true,
+                  fillColor: Colors.white,
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(color: Color(0xFF90CAF9), width: 1.5),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(color: Color(0xFF35618E), width: 2),
+                  ),
+                ),
               ),
+              const SizedBox(height: 16),
               TextField(
                 controller: _mobileController,
-                decoration: const InputDecoration(labelText: "Mobile No", prefixIcon: Icon(Icons.phone)),
+                decoration: InputDecoration(
+                  hintText: "Mobile No",
+                  hintStyle: const TextStyle(color: Color(0xFF90CAF9)),
+                  prefixIcon: const Icon(Icons.phone, color: Color(0xFF90CAF9)),
+                  filled: true,
+                  fillColor: Colors.white,
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(color: Color(0xFF90CAF9), width: 1.5),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(color: Color(0xFF35618E), width: 2),
+                  ),
+                ),
               ),
             ],
           ),
           isActive: _currentStep >= 2,
+          state: StepState.complete,
         ),
       ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Salesians Sarrià 24/25")),
+      backgroundColor: Colors.grey[100],
+      appBar: AppBar(title: const Text("Salesians Sarrià 24/25 Carles Aguilar")),
       body: Stepper(
+        type: StepperType.horizontal,
         steps: getSteps(),
         currentStep: _currentStep,
+        controlsBuilder: (BuildContext context, ControlsDetails details) {
+          return Padding(
+            padding: const EdgeInsets.only(top: 6),
+            child: Row(
+              children: [
+                ElevatedButton(
+                  onPressed: details.onStepContinue,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF35618E),
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  ),
+                  child: const Text('CONTINUE'),
+                ),
+                const SizedBox(width: 8),
+                TextButton(
+                  onPressed: details.onStepCancel,
+                  child: const Text(
+                    'CANCEL',
+                    style: TextStyle(color: Color(0xFF35618E)),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+        onStepTapped: (step) {
+          if (step == _currentStep + 1) {
+            setState(() => _currentStep = step);
+          }
+        },
         onStepContinue: () {
           if (_currentStep < getSteps().length - 1) {
             setState(() => _currentStep += 1);
+          } else {
+            // Último step: mostrar dialog
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: const Text("Información"),
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Email: ${_emailController.text}"),
+                      const SizedBox(height: 8),
+                      Text("Address: ${_addressController.text}"),
+                      const SizedBox(height: 8),
+                      Text("Mobile No: ${_mobileController.text}"),
+                    ],
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: const Text("Cerrar"),
+                    ),
+                  ],
+                );
+              },
+            );
           }
         },
         onStepCancel: () {
