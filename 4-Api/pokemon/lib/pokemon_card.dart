@@ -1,4 +1,13 @@
-// Importamos el modelo `Pokemon` y las dependencias de Flutter.
+/*
+  pokemon_card.dart
+
+  Componente visual que representa una tarjeta individual de un
+  `Pokemon` en la lista principal. Contiene:
+  - Avatar circular (imagen o placeholder)
+  - Nombre y rating
+  - Navegación al detalle con animación `Hero`
+*/
+
 import 'package:pokemon/pokemon_model.dart';
 import 'pokemon_detail_page.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +15,7 @@ import 'package:flutter/material.dart';
 /// `PokemonCard` es un widget con estado que muestra una tarjeta
 /// con el nombre, la imagen y el rating de un `Pokemon`.
 class PokemonCard extends StatefulWidget {
+  /// Objeto de dominio que contiene los datos a mostrar.
   final Pokemon pokemon;
 
   const PokemonCard(this.pokemon, {super.key});
