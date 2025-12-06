@@ -1,5 +1,3 @@
-// Página de detalle de un Pokémon: muestra la imagen, su nombre,
-// tipos (levelPokemon) y permite al usuario votar mediante un slider.
 import 'package:flutter/material.dart';
 import 'pokemon_model.dart';
  
@@ -13,19 +11,15 @@ class PokemonDetailPage extends StatefulWidget {
 }
 
 class _PokemonDetailPageState extends State<PokemonDetailPage> {
-  // Tamaño del avatar circular que se muestra en la parte superior
   final double pokemonAvarterSize = 150.0;
-  // Valor del slider de rating. Integro en 0..10
   double _sliderValue = 10.0;
 
   @override
   void initState() {
     super.initState();
-    // Inicializar el slider con el rating actual del Pokemon
     _sliderValue = (widget.pokemon.rating).toDouble();
   }
 
-  /// Widget que muestra el control para votar (slider) y el botón de submit.
   Widget get addYourRating {
     return Column(
       children: <Widget>[
@@ -37,7 +31,6 @@ class _PokemonDetailPageState extends State<PokemonDetailPage> {
               Flexible(
                 flex: 1,
                 child: Slider(
-                  // Slider con color blanco (usuario solicitado)
                   activeColor: Colors.white,
                   min: 0.0,
                   max: 10.0,
@@ -56,20 +49,17 @@ class _PokemonDetailPageState extends State<PokemonDetailPage> {
                   alignment: Alignment.center,
                   child: Text(
                     '${_sliderValue.toInt()}',
-                    // Número del slider en blanco para coincidir con el slider
                     style: const TextStyle(color: Colors.white, fontSize: 25.0, fontWeight: FontWeight.w600),
                   )),
             ],
           ),
         ),
-        // Botón de submit colocado debajo del control. Estilizado abajo.
         submitRatingButton,
       ],
     );
   }
 
-  /// Guarda el rating seleccionado en el modelo y muestra un SnackBar
-  /// de confirmación.
+
   void updateRating() {
     setState(() {
       widget.pokemon.rating = _sliderValue.toInt();
@@ -87,8 +77,6 @@ class _PokemonDetailPageState extends State<PokemonDetailPage> {
     );
   }
 
-  /// Avatar circular con sombra que muestra la imagen del Pokemon. Usa
-  /// `Hero` para animar la transición hacia la pantalla de detalle.
   Widget get pokemonImage {
     return Hero(
       tag: widget.pokemon,
@@ -108,7 +96,6 @@ class _PokemonDetailPageState extends State<PokemonDetailPage> {
     );
   }
 
-  /// Muestra el rating grande con un icono y el valor. Los colores vienen del tema.
   Widget get rating {
     return Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -123,7 +110,6 @@ class _PokemonDetailPageState extends State<PokemonDetailPage> {
     );
   }
 
-  /// Sección superior con el avatar, nombre y tipos del Pokemon.
   Widget get pokemonProfile {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 32.0),

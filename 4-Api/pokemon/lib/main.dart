@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-// Modelo de dominio y vistas de la aplicación
 import 'pokemon_model.dart';
 import 'pokemon_list.dart';
 import 'new_pokemon_form.dart';
