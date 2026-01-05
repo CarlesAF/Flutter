@@ -23,13 +23,13 @@ class Movie {
   factory Movie.fromMap(Map<String, dynamic> map) {
     return Movie(
       id: map['id'] as int,
-      title: map['title'] ?? '',
+      title: map['title'] ?? map['name'] ?? '',
       posterPath: map['poster_path'] ?? '',
       backdropPath: map['backdrop_path'] ?? '',
       overview: map['overview'] ?? '',
-      releaseDate: map['release_date'] ?? '',
+      releaseDate: map['release_date'] ?? map['first_air_date'] ?? '',
       voteAverage: map['vote_average']?.toDouble() ?? 0.0,
-      genreIds: List<int>.from(map['genre_ids']),
+      genreIds: List<int>.from(map['genre_ids'] ?? []),
     );
   }
 

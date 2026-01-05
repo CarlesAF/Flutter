@@ -8,7 +8,9 @@ import 'package:movies/controllers/movies_controller.dart';
 
 import 'package:movies/models/movie.dart';
 import 'package:movies/models/review.dart';
+import 'package:movies/models/actor.dart';
 import 'package:movies/utils/utils.dart';
+import 'package:movies/widgets/cast_item_widget.dart';
 
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen({
@@ -339,7 +341,44 @@ class DetailsScreen extends StatelessWidget {
                               }
                             },
                           ),
-                          Container(),
+                          FutureBuilder<List<Actor>?>(
+                            future: ApiService.getMovieCast(movie.id),
+                            builder: (_, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              }
+                              if (snapshot.hasData && snapshot.data != null) {
+                                return snapshot.data!.isEmpty
+                                    ? const Padding(
+                                        padding: EdgeInsets.only(top: 30.0),
+                                        child: Text(
+                                          'No cast available',
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      )
+                                    : Padding(
+                                        padding: const EdgeInsets.all(12.0),
+                                        child: ListView.separated(
+                                          scrollDirection: Axis.vertical,
+                                          itemCount: snapshot.data!.length,
+                                          separatorBuilder: (_, __) =>
+                                              const SizedBox(height: 16),
+                                          itemBuilder: (_, index) =>
+                                              CastItemWidget(
+                                            actor: snapshot.data![index],
+                                          ),
+                                        ),
+                                      );
+                              } else {
+                                return const Center(
+                                  child: Text('Error loading cast'),
+                                );
+                              }
+                            },
+                          ),
                         ]),
                       ),
                     ],
