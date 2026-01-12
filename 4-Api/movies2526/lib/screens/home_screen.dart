@@ -51,6 +51,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   iconSize: 24,
                   padding: EdgeInsets.zero,
                   constraints: const BoxConstraints(),
+                  color: Colors.white,
                 ),
               ],
             ),
