@@ -2,10 +2,10 @@
 
 import 'package:get/get.dart';
 
-import 'package:supabase_notes/app/modules/add_note/bindings/add_note_binding.dart';
-import 'package:supabase_notes/app/modules/add_note/views/add_note_view.dart';
-import 'package:supabase_notes/app/modules/edit_note/bindings/edit_note_binding.dart';
-import 'package:supabase_notes/app/modules/edit_note/views/edit_note_view.dart';
+import 'package:supabase_notes/app/modules/add_task/bindings/add_task_binding.dart';
+import 'package:supabase_notes/app/modules/add_task/views/add_task_view.dart';
+import 'package:supabase_notes/app/modules/edit_task/bindings/edit_task_binding.dart';
+import 'package:supabase_notes/app/modules/edit_task/views/edit_task_view.dart';
 import 'package:supabase_notes/app/modules/home/bindings/home_binding.dart';
 import 'package:supabase_notes/app/modules/home/views/home_view.dart';
 import 'package:supabase_notes/app/modules/login/bindings/login_binding.dart';
@@ -44,14 +44,14 @@ class AppPages {
       binding: ProfileBinding(),
     ),
     GetPage(
-      name: _Paths.ADD_NOTE,
-      page: () => AddNoteView(),
-      binding: AddNoteBinding(),
+      name: _Paths.ADD_TASK,
+      page: () => AddTaskView(),
+      binding: AddTaskBinding(),
     ),
     GetPage(
-      name: _Paths.EDIT_NOTE,
-      page: () => EditNoteView(),
-      binding: EditNoteBinding(),
-    ),
+      name: _Paths.EDIT_TASK,
+      page: () => EditTaskView(),
+      binding: EditTaskBinding()
+      ),
   ];
 }

@@ -5,17 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:supabase_notes/app/modules/home/controllers/home_controller.dart';
 
-import '../controllers/add_note_controller.dart';
+import '../controllers/add_task_controller.dart';
 
-class AddNoteView extends GetView<AddNoteController> {
+class AddTaskView extends GetView<AddTaskController> {
   HomeController homeC = Get.find();
 
-  AddNoteView({super.key}); // get controller from another controller
+  AddTaskView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Add Note'),
+          title: const Text('Agregar Tarea'),
           centerTitle: true,
         ),
         body: ListView(
@@ -24,7 +24,7 @@ class AddNoteView extends GetView<AddNoteController> {
             TextField(
               controller: controller.titleC,
               decoration: const InputDecoration(
-                labelText: "Title",
+                labelText: "Título de la tarea",
                 border: OutlineInputBorder(),
               ),
             ),
@@ -34,8 +34,19 @@ class AddNoteView extends GetView<AddNoteController> {
             TextField(
               controller: controller.descC,
               decoration: const InputDecoration(
-                labelText: "Description",
+                labelText: "Descripción",
                 border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(
+              height: 25,
+            ),
+            TextField(
+              controller: controller.dueDateC,
+              decoration: const InputDecoration(
+                labelText: "Fecha de vencimiento (opcional)",
+                border: OutlineInputBorder(),
+                hintText: "ej: 2026-02-15",
               ),
             ),
             const SizedBox(
@@ -44,16 +55,16 @@ class AddNoteView extends GetView<AddNoteController> {
             Obx(() => ElevatedButton(
                 onPressed: () async {
                   if (controller.isLoading.isFalse) {
-                    bool res = await controller.addNote();
+                    bool res = await controller.addTask();
                     if (res == true) {
-                      await homeC.getAllNotes();
+                      await homeC.getAllTasks();
                       Get.back();
                     }
                     controller.isLoading.value = false;
                   }
                 },
                 child: Text(
-                    controller.isLoading.isFalse ? "Add note" : "Loading...")))
+                    controller.isLoading.isFalse ? "Agregar tarea" : "Cargando...")))
           ],
         ));
   }

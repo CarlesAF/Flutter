@@ -2,23 +2,24 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:supabase_notes/app/data/models/notes_model.dart';
+import 'package:supabase_notes/app/data/models/task_model.dart';
 import 'package:supabase_notes/app/modules/home/controllers/home_controller.dart';
 
-import '../controllers/edit_note_controller.dart';
+import '../controllers/edit_task_controller.dart';
 
-class EditNoteView extends GetView<EditNoteController> {
-  Notes note = Get.arguments;
+class EditTaskView extends GetView<EditTaskController> {
+  Task task = Get.arguments;
   HomeController homeC = Get.find();
 
-  EditNoteView({super.key});
+  EditTaskView({super.key});
   @override
   Widget build(BuildContext context) {
-    controller.titleC.text = note.title!;
-    controller.descC.text = note.description!;
+    controller.titleC.text = task.title!;
+    controller.descC.text = task.description!;
+    controller.dueDateC.text = task.dueDate ?? '';
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Edit Note'),
+          title: const Text('Editar Tarea'),
           centerTitle: true,
         ),
         body: ListView(
@@ -27,7 +28,7 @@ class EditNoteView extends GetView<EditNoteController> {
             TextField(
               controller: controller.titleC,
               decoration: const InputDecoration(
-                labelText: "Title",
+                labelText: "Título de la tarea",
                 border: OutlineInputBorder(),
               ),
             ),
@@ -37,8 +38,19 @@ class EditNoteView extends GetView<EditNoteController> {
             TextField(
               controller: controller.descC,
               decoration: const InputDecoration(
-                labelText: "Description",
+                labelText: "Descripción",
                 border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(
+              height: 25,
+            ),
+            TextField(
+              controller: controller.dueDateC,
+              decoration: const InputDecoration(
+                labelText: "Fecha de vencimiento (opcional)",
+                border: OutlineInputBorder(),
+                hintText: "ej: 2026-02-15",
               ),
             ),
             const SizedBox(
@@ -47,16 +59,16 @@ class EditNoteView extends GetView<EditNoteController> {
             Obx(() => ElevatedButton(
                 onPressed: () async {
                   if (controller.isLoading.isFalse) {
-                    bool res = await controller.editNote(note.id!);
+                    bool res = await controller.editTask(task.id!);
                     if (res == true) {
-                      await homeC.getAllNotes();
+                      await homeC.getAllTasks();
                       Get.back();
                     }
                     controller.isLoading.value = false;
                   }
                 },
                 child: Text(
-                    controller.isLoading.isFalse ? "Edit note" : "Loading...")))
+                    controller.isLoading.isFalse ? "Editar tarea" : "Cargando...")))
           ],
         ));
   }
