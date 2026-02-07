@@ -1,10 +1,13 @@
+// Modelo actualizado para tareas (anteriormente Notes)
 class Task {
   int? id;
   int? userId;
   String? title;
   String? description;
   String? createdAt;
+  // NUEVO: Campo para marcar tareas como completadas
   bool? done;
+  // NUEVO: Campo para fecha de vencimiento
   String? dueDate;
 
   Task({
@@ -17,6 +20,7 @@ class Task {
     this.dueDate,
   });
 
+  // Actualizado: Ahora mapea done y due_date
   Task.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     userId = json['user_id'];
@@ -27,6 +31,7 @@ class Task {
     dueDate = json['due_date'];
   }
 
+  // Actualizado: Incluye done y due_date en la serialización
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['id'] = id;

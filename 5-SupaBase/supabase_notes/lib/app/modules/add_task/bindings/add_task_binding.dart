@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 import '../controllers/add_task_controller.dart';
 
+// Actualizado: Renombrado de AddNoteBinding a AddTaskBinding
 class AddTaskBinding extends Bindings {
   @override
   void dependencies() {

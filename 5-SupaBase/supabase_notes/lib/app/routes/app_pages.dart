@@ -2,8 +2,10 @@
 
 import 'package:get/get.dart';
 
+// Actualizado: Imports cambiados de add_note a add_task
 import 'package:supabase_notes/app/modules/add_task/bindings/add_task_binding.dart';
 import 'package:supabase_notes/app/modules/add_task/views/add_task_view.dart';
+// Actualizado: Imports cambiados de edit_note a edit_task
 import 'package:supabase_notes/app/modules/edit_task/bindings/edit_task_binding.dart';
 import 'package:supabase_notes/app/modules/edit_task/views/edit_task_view.dart';
 import 'package:supabase_notes/app/modules/home/bindings/home_binding.dart';
@@ -43,11 +45,13 @@ class AppPages {
       page: () => ProfileView(),
       binding: ProfileBinding(),
     ),
+    // Actualizado: Ruta de ADD_TASK usa AddTaskView y AddTaskBinding
     GetPage(
       name: _Paths.ADD_TASK,
       page: () => AddTaskView(),
       binding: AddTaskBinding(),
     ),
+    // Actualizado: Ruta de EDIT_TASK usa EditTaskView y EditTaskBinding
     GetPage(
       name: _Paths.EDIT_TASK,
       page: () => EditTaskView(),

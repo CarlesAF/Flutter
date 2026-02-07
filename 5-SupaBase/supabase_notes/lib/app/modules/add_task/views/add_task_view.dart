@@ -7,6 +7,7 @@ import 'package:supabase_notes/app/modules/home/controllers/home_controller.dart
 
 import '../controllers/add_task_controller.dart';
 
+// Actualizado: Renombrado de AddNoteView a AddTaskView
 class AddTaskView extends GetView<AddTaskController> {
   HomeController homeC = Get.find();
 
@@ -15,6 +16,7 @@ class AddTaskView extends GetView<AddTaskController> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          // Actualizado: Título cambió a 'Agregar Tarea'
           title: const Text('Agregar Tarea'),
           centerTitle: true,
         ),
@@ -24,6 +26,7 @@ class AddTaskView extends GetView<AddTaskController> {
             TextField(
               controller: controller.titleC,
               decoration: const InputDecoration(
+                // Actualizado: Label más descriptivo
                 labelText: "Título de la tarea",
                 border: OutlineInputBorder(),
               ),
@@ -41,6 +44,7 @@ class AddTaskView extends GetView<AddTaskController> {
             const SizedBox(
               height: 25,
             ),
+            // NUEVO: Campo para fecha de vencimiento
             TextField(
               controller: controller.dueDateC,
               decoration: const InputDecoration(
@@ -55,14 +59,17 @@ class AddTaskView extends GetView<AddTaskController> {
             Obx(() => ElevatedButton(
                 onPressed: () async {
                   if (controller.isLoading.isFalse) {
+                    // Actualizado: Llama addTask() en lugar de addNote()
                     bool res = await controller.addTask();
                     if (res == true) {
+                      // Actualizado: Llama getAllTasks() en lugar de getAllNotes()
                       await homeC.getAllTasks();
                       Get.back();
                     }
                     controller.isLoading.value = false;
                   }
                 },
+                // Actualizado: Texto del botón actualizado
                 child: Text(
                     controller.isLoading.isFalse ? "Agregar tarea" : "Cargando...")))
           ],
